@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js-Hugging Face
+
+## Project Structure
+
+The project is structured as follows:
+
+- `assets/`: This directory contains screenshots of the output responses.
+
+- `public/`: Static assets like svg icons and images used in the application.
+
+- `app/`: Main application directory.
+
+  - `globals.css`: Global stylesheet for the application.
+  - `layout.tsx`: Root layout for the application.
+  - `page.tsx`: Main page for the application.
+
+  - `api/chat/`: Directory for API routes.
+    - `route.ts`: API endpoint for handling chat requests with multimodal capabilities.
+
+- `.env.example`: Environment variable template for project configuration.
+- `.gitignore`: Specifies which files and directories should be ignored by Git.
+- `LICENSE`: Project licensing information.
+- `README.md`: Project documentation and setup instructions.
+- `package.json`: Project dependencies and script configuration.
+
+## Technologies Used
+
+- **JavaScript**: High-level programming language for building web applications.
+- **TypeScript**: Superset of JavaScript that adds static types to the language.
+- **Tailwind CSS**: Utility-first CSS framework for styling web applications.
+- **React**: JavaScript library for building user interfaces.
+- **Next.js**: React framework for building user interfaces.
+- **Hugging Face**: AI model hub for accessing the multimodal model.
+- **Vercel AI SDK**: TypeScript toolkit designed to build AI applications using popular frameworks like Next.js, React etc and runtimes like Node.js.
 
 ## Getting Started
 
-First, run the development server:
+To get started with this project, follow the steps below:
+
+1. Clone the repository: `git clone https://github.com/sitamgithub-MSIT/nextjs-huggingface.git`
+2. Change the directory: `cd nextjs-huggingface`
+3. Install the required dependencies: `npm install`
+4. Run the application: `npm run dev`
+
+**Note**: You need a Hugging Face access token to run the application. You can get the token by signing up on the Hugging Face website and creating a new token from the settings page. After getting the token, you can set it as an environment variable `HUGGINGFACE_TOKEN` in your system by creating a `.env.local` file in the project's root directory. Replace the values with your API key.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+HUGGINGFACE_TOKEN=your_token_here
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open your local host to view the web application in your browser at `http://localhost:3000/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+## Results
 
-To learn more about Next.js, take a look at the following resources:
+## Conclusion
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions are welcome! If you would like to contribute to this project, please raise an issue to discuss the changes you would like to make. Once the changes are approved, you can create a pull request.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+
+If you have any questions or suggestions regarding the project, feel free to reach out to me on my GitHub profile.
+
+Happy coding! 🚀
