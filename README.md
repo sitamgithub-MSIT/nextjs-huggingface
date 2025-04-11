@@ -1,5 +1,7 @@
 # NextJS-Hugging Face
 
+This Next.js project makes use of Hugging Face inference providers in OpenAI-compatible mode to access various multimodal models. It serves as a simple example of how to utilize these inference providers alongside the Vercel AI SDK to create a multimodal chatbot that interacts with users through text and images. The project is designed to be easy to set up and run locally, making it a great starting point for developers looking to explore the capabilities of Hugging Face models in a Next.js environment.
+
 ## Project Structure
 
 The project is structured as follows:
@@ -54,9 +56,15 @@ Open your local host to view the web application in your browser at `http://loca
 
 ## Usage
 
+Once running (either locally in development mode using npm run dev or in production), open your browser and navigate to http://localhost:3000/.
+
+- Chat Interface: The main page presents a multi-modal chat interface. Users can send text messages and attach images.
+- Image Upload: When attaching images, previews are display for each uploaded image. You can remove any selected image before sending your message.
+- Chat Interaction: The chat uses Hugging Face’s inference provider with the AI chat model to return responses with text and image attachments.
+
 ## Results
 
-## Conclusion
+When the application is running, users will encounter a responsive chat interface where text entries prompt AI responses based on the Hugging Face model. Users can upload images, which will display preview thumbnails before submission. The AI's responses may include multi-modal attachments, showcasing images alongside text as provided by the model output. This setup demonstrates how traditional chat interfaces can be enhanced with multimodal capabilities. For results, please refer to the `assets/` directory for screenshots that illustrate the chat interface in action.
 
 ## Contributing
 
