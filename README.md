@@ -1,4 +1,4 @@
-# Next.js-Hugging Face
+# NextJS-Hugging Face
 
 ## Project Structure
 
@@ -6,7 +6,7 @@ The project is structured as follows:
 
 - `assets/`: This directory contains screenshots of the output responses.
 
-- `public/`: Static assets like svg icons and images used in the application.
+- `public/`: Static assets like SVG icons and images used in the application.
 
 - `app/`: Main application directory.
 
@@ -31,7 +31,7 @@ The project is structured as follows:
 - **React**: JavaScript library for building user interfaces.
 - **Next.js**: React framework for building user interfaces.
 - **Hugging Face**: AI model hub for accessing the multimodal model.
-- **Vercel AI SDK**: TypeScript toolkit designed to build AI applications using popular frameworks like Next.js, React etc and runtimes like Node.js.
+- **Vercel AI SDK**: TypeScript toolkit designed to build AI applications using popular frameworks like Next.js, React, and runtimes like Node.js.
 
 ## Getting Started
 
