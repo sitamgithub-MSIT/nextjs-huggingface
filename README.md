@@ -1,6 +1,6 @@
 # NextJS-Hugging Face
 
-This Next.js project makes use of Hugging Face inference providers in OpenAI-compatible mode to access various multimodal models. It serves as a simple example of how to utilize these inference providers alongside the Vercel AI SDK to create a multimodal chatbot that interacts with users through text and images. The project is designed to be easy to set up and run locally, making it a great starting point for developers looking to explore the capabilities of Hugging Face models in a Next.js environment.
+This Next.js project makes use of Hugging Face [inference providers](https://huggingface.co/docs/inference-providers/en/index) in OpenAI-compatible mode to access various [multimodal models](https://huggingface.co/models?inference_provider=all&pipeline_tag=image-text-to-text). It serves as a simple example of how to utilize these inference providers alongside the [Vercel AI SDK](https://sdk.vercel.ai/) to create a multimodal chatbot that interacts with users through text and images. The project is designed to be easy to set up and run locally, making it a great starting point for developers looking to explore the capabilities of Hugging Face models in a Next.js environment.
 
 ## Project Structure
 
@@ -56,15 +56,43 @@ Open your local host to view the web application in your browser at `http://loca
 
 ## Usage
 
-Once running (either locally in development mode using npm run dev or in production), open your browser and navigate to http://localhost:3000/.
+Once running (locally in development mode using `npm run dev`), open your browser and navigate to http://localhost:3000/.
 
 - Chat Interface: The main page presents a multi-modal chat interface. Users can send text messages and attach images.
 - Image Upload: When attaching images, previews are display for each uploaded image. You can remove any selected image before sending your message.
 - Chat Interaction: The chat uses Hugging Face’s inference provider with the AI chat model to return responses with text and image attachments.
 
+### Changing the Model
+
+To change the model used in the application, you can modify the `route.ts` file located in the `app/api/chat/` directory. You can choose any other compatible model available on Hugging Face that has inference providers options. You can find a list of available models on the [Hugging Face Model Hub](https://huggingface.co/models?inference_provider=all&pipeline_tag=image-text-to-text).
+
+```typescript
+/** Initialize the model with selected inference provider */
+const model = createOpenAI({
+  baseURL: "https://router.huggingface.co/nebius/v1", // Use other inference providers as well
+  apiKey: env.HUGGINGFACE_ACCESS_TOKEN ?? "",
+});
+```
+
+Replace `baseURL` with the desired inference provider URL. For example, if you want to use the `google/gemma-3-27b-it-fast` model with the `nebius` inference provider, the code would look like above.
+
+```typescript
+// Get the response from the model
+const result = streamText({
+  model: model("google/gemma-3-27b-it-fast"),
+  messages: messages,
+  maxTokens: 500,
+  experimental_transform: smoothStream(),
+});
+```
+
+To change the model, replace `google/gemma-3-27b-it-fast` with other models those satisfy the inference provider requirements.
+
+**Note**: Model names can be different when using a specific inference provider. For example, the `google/gemma-3-27b-it-fast` model will not be available on all inference providers. Always check the model documentation for compatibility with the selected inference provider.
+
 ## Results
 
-When the application is running, users will encounter a responsive chat interface where text entries prompt AI responses based on the Hugging Face model. Users can upload images, which will display preview thumbnails before submission. The AI's responses may include multi-modal attachments, showcasing images alongside text as provided by the model output. This setup demonstrates how traditional chat interfaces can be enhanced with multimodal capabilities. For results, please refer to the `assets/` directory for screenshots that illustrate the chat interface in action.
+When the application is running, users will encounterr a responsive chat interface uses a Hugging Face model to generate AI responses to text and image uploads. Image previews are shown before submission, and responses may include text and images. This setup demonstrates how traditional chat interfaces can be enhanced with multimodal capabilities. For results, please refer to the `assets/` directory for screenshots that illustrate the chat interface in action.
 
 ## Contributing
 
