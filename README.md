@@ -55,6 +55,41 @@ Open your local host to view the web application in your browser at `http://loca
 
 ## Deployment
 
+To deploy this application to a production environment, you can follow the [Vercel YouTube video](https://www.youtube.com/watch?v=AiiGjB2AxqA). Once the application is deployed, you can access it at a live URL.
+
+To deploy this application to Hugging Face Spaces, you can do this via selecting the Spaces SDK as Docker when creating a new Space. Create a `Dockerfile` in the root directory of the project and set the following content:
+
+```dockerfile
+# Use Node 22 as the base image
+FROM node:22-alpine
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy package.json and package-lock.json (if you have one)
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port your React app runs on
+EXPOSE 7860
+
+# Change ownership of /app to the node user
+RUN chown -R node:node /app
+
+# Switch to the node user
+USER node
+
+# Command to run the application
+CMD ["npm", "run", "dev"]
+```
+
+**Note**: Make sure to set the `HUGGINGFACE_TOKEN` environment variable in your deployment settings.
+
 ## Usage
 
 Once running (locally in development mode using `npm run dev`), open your browser and navigate to http://localhost:3000/.
