@@ -59,7 +59,7 @@ Open your local host to view the web application in your browser at `http://loca
 Once running (locally in development mode using `npm run dev`), open your browser and navigate to http://localhost:3000/.
 
 - Chat Interface: The main page presents a multi-modal chat interface. Users can send text messages and attach images.
-- Image Upload: When attaching images, previews are display for each uploaded image. You can remove any selected image before sending your message.
+- Image Upload: When attaching images, previews are displayed for each uploaded image. You can remove any selected image before sending your message.
 - Chat Interaction: The chat uses Hugging Face’s inference provider with the AI chat model to return responses with text and image attachments.
 
 ### Changing the Model
