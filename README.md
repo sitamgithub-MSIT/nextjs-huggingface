@@ -1,6 +1,6 @@
 # NextJS-Hugging Face
 
-This Next.js project makes use of Hugging Face [inference providers](https://huggingface.co/docs/inference-providers/en/index) in OpenAI-compatible mode to access various [multimodal models](https://huggingface.co/models?inference_provider=all&pipeline_tag=image-text-to-text). It serves as a simple example of how to utilize these inference providers alongside the [Vercel AI SDK](https://sdk.vercel.ai/) to create a multimodal chatbot that interacts with users through text and images. The project is designed to be easy to set up and run locally, making it a great starting point for developers looking to explore the capabilities of Hugging Face models in a Next.js environment.
+This Next.js project makes use of Hugging Face [inference providers](https://huggingface.co/docs/inference-providers/en/index) in OpenAI-compatible mode to access various [multimodal models](https://huggingface.co/models?inference_provider=all&pipeline_tag=image-text-to-text). It serves as a simple example of utilizing these inference providers alongside the [Vercel AI SDK](https://sdk.vercel.ai/) to create a multimodal chatbot that interacts with users through text and images. The project is designed to be easy to set up and run locally, making it a great starting point for developers looking to explore the capabilities of Hugging Face models in a Next.js environment.
 
 Below is a screenshot of the application in action:
 
@@ -57,7 +57,7 @@ Open your local host to view the web application in your browser at `http://loca
 
 To deploy this application to a production environment, you can follow the [Vercel YouTube video](https://www.youtube.com/watch?v=AiiGjB2AxqA). Once the application is deployed, you can access it at a live URL.
 
-To deploy this application to Hugging Face Spaces, you can do this via selecting the Spaces SDK as Docker when creating a new Space. Create a `Dockerfile` in the root directory of the project and set the following content:
+To deploy this application to Hugging Face Spaces, you can do this by selecting the Spaces SDK as Docker when creating a new Space. Create a `Dockerfile` in the root directory of the project and set the following content:
 
 ```dockerfile
 # Use Node 22 as the base image
@@ -100,7 +100,7 @@ Once running (locally in development mode using `npm run dev`), open your browse
 
 ### Changing the Model
 
-To change the model used in the application, you can modify the `route.ts` file located in the `app/api/chat/` directory. You can choose any other compatible model available on Hugging Face that has inference providers options. You can find a list of available models on the [Hugging Face Model Hub](https://huggingface.co/models?inference_provider=all&pipeline_tag=image-text-to-text).
+To change the model used in the application, you can modify the `route.ts` file located in the `app/api/chat/` directory. You can choose any other compatible Hugging Face model with inference providers options. You can find a list of available models on the [Hugging Face Model Hub](https://huggingface.co/models?inference_provider=all&pipeline_tag=image-text-to-text).
 
 ```typescript
 /** Initialize the model with selected inference provider */
@@ -122,13 +122,13 @@ const result = streamText({
 });
 ```
 
-To change the model, replace `google/gemma-3-27b-it-fast` with other models those satisfy the inference provider requirements.
+To change the model, replace `google/gemma-3-27b-it-fast` with other models that satisfy the inference provider requirements.
 
 **Note**: Model names can be different when using a specific inference provider. For example, the `google/gemma-3-27b-it-fast` model will not be available on all inference providers. Always check the model documentation for compatibility with the selected inference provider.
 
 ## Results
 
-When the application is running, users will encounterr a responsive chat interface uses a Hugging Face model to generate AI responses to text and image uploads. Image previews are shown before submission, and responses may include text and images. This setup demonstrates how traditional chat interfaces can be enhanced with multimodal capabilities. For results, please refer to the `assets/` directory for screenshots that illustrate the chat interface in action.
+When the application is running, users will encounter a responsive chat interface that uses a Hugging Face model to generate AI responses to text and image uploads. Image previews are shown before submission, and responses may include text and images. This setup demonstrates how traditional chat interfaces can be enhanced with multimodal capabilities. For results, please refer to the `assets/` directory for screenshots that illustrate the chat interface in action.
 
 ## Contributing
 
