@@ -4,7 +4,7 @@ This Next.js project makes use of Hugging Face [inference providers](https://hug
 
 Below is a screenshot of the application in action:
 
-![Gemma Llama.cpp](assets/demo1.png)
+![Next.js Hugging Face](assets/demo1.png)
 
 ## Project Structure
 
