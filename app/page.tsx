@@ -2,16 +2,37 @@
 
 /** Import necessary modules. */
 import { useChat } from "@ai-sdk/react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 
 /** This is a simple multi-modal chat interface that allows users to chat with the AI model. */
 export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const { messages, input, handleInputChange, handleSubmit, isLoading } =
+    useChat();
 
   const [files, setFiles] = useState<FileList | undefined>(undefined);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imagePreview, setImagePreview] = useState<string[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  // Track when streaming starts and stops
+  useEffect(() => {
+    if (isLoading) {
+      setIsProcessing(true);
+    } else {
+      setIsProcessing(false);
+    }
+  }, [isLoading]);
+
+  // Detect when assistant starts responding (streaming begins)
+  useEffect(() => {
+    if (messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      if (lastMessage.role === "assistant" && lastMessage.content.length > 0) {
+        setIsProcessing(false);
+      }
+    }
+  }, [messages]);
 
   // Handle file selection and generate previews
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +97,21 @@ export default function Chat() {
             </div>
           </div>
         ))}
+
+        {/* Processing indicator */}
+        {isProcessing && (
+          <div className="bg-gray-100 dark:bg-gray-700 mr-auto max-w-[80%] p-3 rounded-lg">
+            <div className="font-semibold mb-1">AI Assistant</div>
+            <div className="flex items-center space-x-2 text-sm text-gray-600 dark:text-gray-400">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce-delay-1"></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce-delay-2"></div>
+              </div>
+              <span>Processing your request...</span>
+            </div>
+          </div>
+        )}
       </div>
 
       <form
@@ -109,7 +145,9 @@ export default function Chat() {
                     if (files) {
                       const dataTransfer = new DataTransfer();
                       Array.from(files).forEach((file, i) => {
-                        if (i !== index) dataTransfer.items.add(file);
+                        if (i !== index) {
+                          dataTransfer.items.add(file);
+                        }
                       });
                       setFiles(
                         dataTransfer.files.length > 0
@@ -155,16 +193,20 @@ export default function Chat() {
           </label>
 
           <input
-            className="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-gray-100"
+            className="flex-1 p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 dark:text-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
             value={input}
-            placeholder="Type your message..."
+            placeholder={
+              isProcessing ? "Processing..." : "Type your message..."
+            }
             onChange={handleInputChange}
+            disabled={isProcessing}
           />
 
           <button
             type="submit"
             className="p-2 bg-blue-500 dark:bg-blue-600 text-white rounded-md hover:bg-blue-600 dark:hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={!input.trim() && !files}
+            disabled={(!input.trim() && !files) || isProcessing}
+            aria-label="Send message"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
