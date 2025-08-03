@@ -3,10 +3,10 @@ import { streamText, Message, smoothStream } from "ai";
 import { createOpenAI } from "@ai-sdk/openai";
 import { env } from "process";
 
-/** Initialize the model with selected inference provider */
+/** Initialize the model with HF inference provider */
 // export const maxDuration = 30;
 const model = createOpenAI({
-  baseURL: "https://router.huggingface.co/v1", // Use other inference providers as well
+  baseURL: "https://router.huggingface.co/v1",
   apiKey: env.HF_TOKEN ?? "",
 });
 
