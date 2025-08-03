@@ -45,10 +45,10 @@ To get started with this project, follow the steps below:
 3. Install the required dependencies: `npm install`
 4. Run the application: `npm run dev`
 
-**Note**: You need a Hugging Face access token to run the application. You can get the token by signing up on the Hugging Face website and creating a new token from the settings page. After getting the token, you can set it as an environment variable `HUGGINGFACE_TOKEN` in your system by creating a `.env.local` file in the project's root directory. Replace the values with your API key.
+**Note**: You need a Hugging Face access token to run the application. You can get the token by signing up on the Hugging Face website and creating a new token from the settings page. After getting the token, you can set it as an environment variable `HF_TOKEN` in your system by creating a `.env.local` file in the project's root directory. Replace the values with your API key.
 
 ```bash
-HUGGINGFACE_TOKEN=your_token_here
+HF_TOKEN=your_token_here
 ```
 
 Open your local host to view the web application in your browser at `http://localhost:3000/`.
@@ -88,7 +88,7 @@ USER node
 CMD ["npm", "run", "dev"]
 ```
 
-**Note**: Make sure to set the `HUGGINGFACE_TOKEN` environment variable in your deployment settings.
+**Note**: Make sure to set the `HF_TOKEN` environment variable in your deployment settings.
 
 ## Usage
 
@@ -103,28 +103,16 @@ Once running (locally in development mode using `npm run dev`), open your browse
 To change the model used in the application, you can modify the `route.ts` file located in the `app/api/chat/` directory. You can choose any other compatible Hugging Face model with inference providers options. You can find a list of available models on the [Hugging Face Model Hub](https://huggingface.co/models?inference_provider=all&pipeline_tag=image-text-to-text).
 
 ```typescript
-/** Initialize the model with selected inference provider */
-const model = createOpenAI({
-  baseURL: "https://router.huggingface.co/nebius/v1", // Use other inference providers as well
-  apiKey: env.HUGGINGFACE_ACCESS_TOKEN ?? "",
-});
-```
-
-Replace `baseURL` with the desired inference provider URL. For example, if you want to use the `google/gemma-3-27b-it-fast` model with the `nebius` inference provider, the code would look like above.
-
-```typescript
 // Get the response from the model
 const result = streamText({
-  model: model("google/gemma-3-27b-it-fast"),
+  model: model("google/gemma-3-27b-it"),
   messages: messages,
   maxTokens: 500,
   experimental_transform: smoothStream(),
 });
 ```
 
-To change the model, replace `google/gemma-3-27b-it-fast` with other models that satisfy the inference provider requirements.
-
-**Note**: Model names can be different when using a specific inference provider. For example, the `google/gemma-3-27b-it-fast` model will not be available on all inference providers. Always check the model documentation for compatibility with the selected inference provider.
+To change the model, replace `google/gemma-3-27b-it` with other models that satisfy the inference provider options in Hugging Face.
 
 ## Results
 
